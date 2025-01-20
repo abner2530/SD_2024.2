@@ -1,7 +1,5 @@
 package com.example.Testes_Q2;
 
-import com.example.Model.AparelhosInputStream;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 

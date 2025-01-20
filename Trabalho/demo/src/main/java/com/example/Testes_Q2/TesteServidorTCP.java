@@ -1,7 +1,5 @@
 package com.example.Testes_Q2;
 
-import com.example.Model.AparelhosInputStream;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
