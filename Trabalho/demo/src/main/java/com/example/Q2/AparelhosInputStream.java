@@ -11,18 +11,17 @@ public class AparelhosInputStream {
     }
 
     public void lerAparelhos() throws IOException {
-        // Lê o número de aparelhos
+
         int numeroAparelhos = in.read();
         System.out.println("Número de aparelhos recebidos: " + numeroAparelhos);
 
         for (int i = 0; i < numeroAparelhos; i++) {
-            // Lê o tamanho e os bytes do modelo
+
             int tamanhoModelo = in.read();
             byte[] modeloBytes = new byte[tamanhoModelo];
             in.read(modeloBytes);
             String modelo = new String(modeloBytes);
 
-            // Lê o tamanho e os bytes do preço
             int tamanhoPreco = in.read();
             byte[] precoBytes = new byte[tamanhoPreco];
             in.read(precoBytes);
