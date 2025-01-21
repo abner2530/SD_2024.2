@@ -1,4 +1,3 @@
-// Classe para envio via stream
 package com.example.Model;
 
 import java.io.IOException;
@@ -15,18 +14,15 @@ public class AparelhosOutputStream {
     }
 
     public void enviarAparelhos() throws IOException {
-        // Envia o número de aparelhos
         out.write(aparelhos.size());
 
         for (Aparelho aparelho : aparelhos) {
             byte[] modeloBytes = aparelho.getModelo().getBytes();
             byte[] precoBytes = String.valueOf(aparelho.getPreco()).getBytes();
 
-            // Envia o tamanho e os bytes do modelo
             out.write(modeloBytes.length);
             out.write(modeloBytes);
 
-            // Envia o tamanho e os bytes do preço
             out.write(precoBytes.length);
             out.write(precoBytes);
         }

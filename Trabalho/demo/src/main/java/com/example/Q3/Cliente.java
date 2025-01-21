@@ -12,15 +12,12 @@ public class Cliente {
              ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
              ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-            // Criando um aparelho para enviar
             Aparelho tv = new TV("Samsung 4K", 2500.00, 55);
 
-            // Empacotando a requisição
             System.out.println("Enviando requisição para o servidor...");
             out.writeObject(tv);
             out.flush();
 
-            // Desempacotando a resposta do servidor
             Aparelho aparelhoRecebido = (Aparelho) in.readObject();
             System.out.println("Resposta recebida do servidor:");
             aparelhoRecebido.exibirInformacoes();

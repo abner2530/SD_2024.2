@@ -1,4 +1,3 @@
-// Classe Servidor para receber os dados via TCP
 package com.example.Model;
 
 import java.io.*;
@@ -28,18 +27,15 @@ public class ServidorTCP {
     }
 
     private static void receberDados(InputStream input) throws IOException {
-        // Lendo o número de aparelhos
         int numeroAparelhos = input.read();
         System.out.println("Número de aparelhos recebidos: " + numeroAparelhos);
 
         for (int i = 0; i < numeroAparelhos; i++) {
-            // Lendo o tamanho e os bytes do modelo
             int tamanhoModelo = input.read();
             byte[] modeloBytes = new byte[tamanhoModelo];
             input.read(modeloBytes);
             String modelo = new String(modeloBytes);
 
-            // Lendo o tamanho e os bytes do preço
             int tamanhoPreco = input.read();
             byte[] precoBytes = new byte[tamanhoPreco];
             input.read(precoBytes);

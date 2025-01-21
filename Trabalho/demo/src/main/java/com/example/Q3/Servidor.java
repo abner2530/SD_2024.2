@@ -16,13 +16,10 @@ public class Servidor {
                      ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
                      ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream())) {
 
-                    // Desempacotando a requisição
                     Aparelho aparelhoRecebido = (Aparelho) in.readObject();
                     System.out.println("Requisição recebida:");
                     aparelhoRecebido.exibirInformacoes();
 
-                    // Processando a requisição e preparando a resposta
-                    // Neste caso, apenas retornando o mesmo aparelho como resposta
                     out.writeObject(aparelhoRecebido);
                     out.flush();
                     System.out.println("Resposta enviada de volta para o cliente.");
@@ -36,4 +33,3 @@ public class Servidor {
         }
     }
 }
-

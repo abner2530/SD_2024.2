@@ -1,4 +1,3 @@
-// Classe Depósito
 package com.example.Model;
 
 import java.util.ArrayList;
