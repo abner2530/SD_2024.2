@@ -1,0 +1,7 @@
+A interface remota Hello é definida como o ponto de comunicação entre o cliente e o servidor. Ela estende a interface Remote e declara o método sayHello(String name), que pode ser invocado remotamente e lança RemoteException em caso de falha. A implementação do serviço remoto é realizada na classe HelloImpl, que estende UnicastRemoteObject e define o comportamento do método sayHello, retornando uma mensagem de saudação personalizada.
+
+O servidor é implementado na classe Server, que inicializa o registro RMI na porta padrão 1099 usando LocateRegistry.createRegistry. Ele cria uma instância de HelloImpl e a registra no registro RMI com o nome "HelloService" por meio do método Naming.rebind. Após concluir a configuração, o servidor imprime uma mensagem indicando que está pronto para atender a chamadas remotas.
+
+O cliente, implementado na classe Client, conecta-se ao serviço remoto utilizando Naming.lookup, apontando para o endereço rmi://localhost:1099/HelloService. Após localizar o serviço, o cliente invoca o método remoto sayHello, passando um nome como parâmetro, e exibe no console a resposta recebida do servidor.
+
+Essa aplicação demonstra como o Java RMI permite a comunicação entre processos distribuídos, abstraindo os detalhes de rede e facilitando a chamada remota de métodos. A separação clara entre interface, implementação, servidor e cliente torna o sistema modular e de fácil manutenção. A configuração Maven simplifica o gerenciamento de dependências e o empacotamento, garantindo uma implementação eficiente e portátil.
