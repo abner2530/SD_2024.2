@@ -2,11 +2,17 @@ package com.example;
 
 import java.io.Serializable;
 import java.util.Objects;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Aparelho implements Serializable {
     private String id;
     private String marca;
     private double preco;
+
+    public Aparelho() {
+    }
 
     public Aparelho(String id, String marca, double preco) {
         this.id = id;
@@ -36,6 +42,26 @@ public class Aparelho implements Serializable {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public String toJSON() {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.writeValueAsString(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Aparelho fromJSON(String json) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(json, Aparelho.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

@@ -4,10 +4,14 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Deposito extends UnicastRemoteObject implements Transferivel {
     private String nome;
     private List<Aparelho> aparelhos;
+
+    public Deposito() throws RemoteException {
+    }
 
     public Deposito(String nome) throws RemoteException {
         this.nome = nome;
@@ -51,11 +55,40 @@ public class Deposito extends UnicastRemoteObject implements Transferivel {
         return null;
     }
 
+    public String toJSON() {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            DepositoDTO dto = new DepositoDTO(this.nome, this.aparelhos);
+            return mapper.writeValueAsString(dto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Deposito fromJSON(String json) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            DepositoDTO dto = mapper.readValue(json, DepositoDTO.class);
+            Deposito deposito = new Deposito(dto.getNome());
+            deposito.aparelhos = dto.getAparelhos();
+            return deposito;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @Override
     public String toString() {
         return "Deposito{" +
                 "nome='" + nome + '\'' +
                 ", aparelhos=" + aparelhos +
                 '}';
+    }
+
+    @Override
+    public void transferirPara(String novoDeposito) {
+        // Implementar a lógica de transferência
     }
 }

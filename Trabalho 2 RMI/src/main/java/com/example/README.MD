@@ -1,4 +1,4 @@
-Primeiramente, foram criadas quatro classes do tipo POJOs: Aparelho, TV, Radio e Deposito. A classe Aparelho serve como a classe base para todos os aparelhos, enquanto TV e Radio são subclasses de Aparelho, representando diferentes tipos de aparelhos. A classe Deposito é responsável por armazenar uma lista de aparelhos.
+Primeiramente, foram criadas quatro classes do tipo POJO: Aparelho, TV, Radio e Deposito. A classe Aparelho serve como a classe base para todos os aparelhos, enquanto TV e Radio são subclasses de Aparelho, representando diferentes tipos de aparelhos. A classe Deposito é responsável por armazenar uma lista de aparelhos.
 
 Para atender ao requisito de composição tipo agregação ("tem-um"), a classe Deposito possui uma lista de objetos Aparelho. Além disso, a aplicação implementa composição tipo extensão ("é-um") através das classes TV e Radio, que estendem a classe Aparelho.
 

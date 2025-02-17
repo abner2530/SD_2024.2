@@ -1,33 +1,33 @@
 package com.example;
 
-import java.rmi.Naming;
-import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Client {
     public static void main(String[] args) {
         try {
-            Transferivel deposito = (Transferivel) Naming.lookup("rmi://localhost:1099/DepositoService");
+            RemoteObjectRef ref = new RemoteObjectRef("localhost", 1099, "DepositoService");
+            RequestHandler handler = new RequestHandler();
+            ObjectMapper objectMapper = new ObjectMapper();
 
-            Aparelho tv = new TV("1", "Samsung", 1500.0, 55);
-            Aparelho radio = new Radio("2", "Sony", 300.0, "FM");
+            Aparelho aparelho = new Radio("2", "Panasonic", 150.00, "FM 101.1");
+            byte[] arguments = objectMapper.writeValueAsBytes(aparelho);
+            handler.doOperation(ref, 1, arguments);
 
-            deposito.adicionarAparelho(tv);
-            deposito.adicionarAparelho(radio);
+            byte[] response = handler.doOperation(ref, 3, new byte[0]);
+            System.out.println(new String(response));
 
-            List<Aparelho> aparelhos = deposito.listarAparelhos();
-            for (Aparelho aparelho : aparelhos) {
-                System.out.println(aparelho);
-            }
+            handler.doOperation(ref, 2, arguments);
 
-            Aparelho aparelhoBuscado = deposito.buscarAparelhoPorId("1");
-            System.out.println("Aparelho buscado: " + aparelhoBuscado);
+            response = handler.doOperation(ref, 3, new byte[0]);
+            System.out.println(new String(response));
 
-            deposito.removerAparelho(tv);
+            String id = "2";
+            response = handler.doOperation(ref, 4, id.getBytes());
+            System.out.println(new String(response));
 
-            aparelhos = deposito.listarAparelhos();
-            for (Aparelho aparelho : aparelhos) {
-                System.out.println(aparelho);
-            }
+            String novoDeposito = "Novo Deposito";
+            handler.doOperation(ref, 5, novoDeposito.getBytes());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
